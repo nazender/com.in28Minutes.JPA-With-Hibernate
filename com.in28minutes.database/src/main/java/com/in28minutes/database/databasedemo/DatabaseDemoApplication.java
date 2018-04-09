@@ -1,5 +1,6 @@
 package com.in28minutes.database.databasedemo;
 
+import com.in28minutes.database.databasedemo.entity.Person;
 import com.in28minutes.database.databasedemo.jdbc.PersonJbdcDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.Date;
 
 @SpringBootApplication
 public class DatabaseDemoApplication implements CommandLineRunner  {
@@ -26,6 +29,8 @@ public class DatabaseDemoApplication implements CommandLineRunner  {
         logger.info("User id 10001 -> {}", dao.findById(10001));
         logger.info("Deleting 10002 -> No of Rows Deleted - {}", dao.deleteById(10002));
         logger.info("All users -> {}", dao.findAll());
+        logger.info("Inserting 10010 -> {}", dao.insert(new Person(10010, "Tara", "Berlin", new Date())));
+        logger.info("Update 10003 -> {}", dao.update(new Person(10003, "Pieter", "Utrecht", new Date())));
     }
 
 }
