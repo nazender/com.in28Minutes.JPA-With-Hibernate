@@ -16,15 +16,17 @@ public class PersonJbdcDao {
     JdbcTemplate jdbcTemplate;
 
     public List<Person> findAll() {
-        return jdbcTemplate.query(
-                "select * from person", new BeanPropertyRowMapper(Person.class)
-        );
+        return jdbcTemplate.query("select * from person", new PersonRowMapper());
+//        return jdbcTemplate.query(
+//                "select * from person", new BeanPropertyRowMapper(Person.class)
+//        );
     }
 
     public Person findById(int id) {
-        return jdbcTemplate.queryForObject(
-                "select * from person where id=?", new Object[] { id }, new BeanPropertyRowMapper<Person>(Person.class)
-        );
+        return jdbcTemplate.queryForObject("select * from person where id=?", new Object[] { id }, new PersonRowMapper());
+//        return jdbcTemplate.queryForObject(
+//                "select * from person where id=?", new Object[] { id }, new BeanPropertyRowMapper<Person>(Person.class)
+//        );
     }
 
     public int deleteById(int id) {
