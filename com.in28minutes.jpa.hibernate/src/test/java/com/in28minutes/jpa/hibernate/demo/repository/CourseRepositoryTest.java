@@ -1,11 +1,9 @@
 package com.in28minutes.jpa.hibernate.demo.repository;
 
-import com.in28minutes.jpa.hibernate.demo.DemoApplication;
+import com.in28minutes.jpa.hibernate.demo.DemoJpaApplication;
 import com.in28minutes.jpa.hibernate.demo.entity.Course;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -15,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=DemoApplication.class)
+@SpringBootTest(classes= DemoJpaApplication.class)
 public class CourseRepositoryTest {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
