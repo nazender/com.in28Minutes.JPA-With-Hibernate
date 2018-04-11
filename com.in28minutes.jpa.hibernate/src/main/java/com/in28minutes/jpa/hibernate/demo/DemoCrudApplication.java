@@ -31,6 +31,7 @@ public class DemoCrudApplication implements CommandLineRunner {
 		logger.info("Find by Id 10001 -> {}", crudRepository.findById(10001L));
 		crudRepository.deleteById(1L);
 		logger.info("Find all -> {}", crudRepository.findAll());
+
 	}
 
 
