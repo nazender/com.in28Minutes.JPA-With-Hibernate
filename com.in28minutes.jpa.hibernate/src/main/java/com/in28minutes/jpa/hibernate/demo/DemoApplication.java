@@ -25,8 +25,10 @@ public class DemoApplication implements CommandLineRunner {
 	public void run(String... arg0) throws Exception {
 		Course course = repository.findById(10001L);
 		logger.info("Course 10001 -> {}", course);
-		repository.deleteById(10001L);
-
+		repository.save(new Course("Microservices in 100 Steps"));
+		course.setName("Hello");
+		repository.save(course);
+		//repository.deleteById(10001L);
 	}
 
 }
