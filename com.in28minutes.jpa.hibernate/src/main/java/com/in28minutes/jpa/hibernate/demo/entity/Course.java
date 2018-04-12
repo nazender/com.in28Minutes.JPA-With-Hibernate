@@ -3,9 +3,11 @@ package com.in28minutes.jpa.hibernate.demo.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
+@Table(name = "CourseDetails")
 public class Course {
 
     @Id
