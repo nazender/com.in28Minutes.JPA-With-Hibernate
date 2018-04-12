@@ -1,9 +1,6 @@
 package com.in28minutes.jpa.hibernate.demo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +11,7 @@ public class Course {
     @GeneratedValue
     private Long id;
 
+    @Column(name = "fullname", nullable = false, length = 100)
     private String name;
 
     public Course() {
