@@ -35,10 +35,12 @@ public class CourseRepository {
     }
 
     public void playWithEntityManager() {
-        Course course = new Course("Web Services in 100 Steps");
-        entityManager.persist(course);
-        course.setName("Web Services in 100 Steps - Updated");
-        course.setName("Web Services in 100 Steps - Again Updated");
+        Course course1 = new Course("Course 1 Web Services in 100 Steps");
+        entityManager.persist(course1);
+        course1.setName("Course 1 Web Services in 100 Steps - Updated");
+        entityManager.flush();
+        entityManager.detach(course1);
+        course1.setName("Course 2 Web Services in 100 Steps - Updated");
     }
 
 }
