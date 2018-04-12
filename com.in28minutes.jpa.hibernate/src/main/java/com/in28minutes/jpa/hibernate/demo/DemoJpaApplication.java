@@ -18,7 +18,7 @@ public class DemoJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg0) throws Exception {
-		repository.playWithEntityManager();
+		logger.info("Find all -> {}", repository.findAll());
 	}
 
 }

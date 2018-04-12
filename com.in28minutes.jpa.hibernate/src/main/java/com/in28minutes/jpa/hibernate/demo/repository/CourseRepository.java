@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -33,6 +35,12 @@ public class CourseRepository {
 
         return course;
     }
+
+    public List<Course> findAll() {
+        TypedQuery<Course> query = entityManager.createQuery("Select c From Course c", Course.class);
+        return query.getResultList();
+    }
+
 
     public void playWithEntityManager() {
         Course course1 = new Course("Web Services in 100 Steps");
