@@ -57,9 +57,9 @@ public class CourseRepository {
         entityManager.flush();
 
         course1.setName("Web Services in 100 Steps - Updated");
-        course2.setName("Angular Js in 100 Steps - Updated");
+        //course2.setName("Angular Js in 100 Steps - Updated");
 
-        entityManager.refresh(course1);
+        //entityManager.refresh(course1);
 
         entityManager.flush();
 

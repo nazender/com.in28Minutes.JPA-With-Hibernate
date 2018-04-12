@@ -1,6 +1,10 @@
 package com.in28minutes.jpa.hibernate.demo.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -8,11 +12,17 @@ import java.util.Objects;
 public class Course {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "fullname", nullable = false, length = 100)
     private String name;
+
+    @UpdateTimestamp
+    private LocalDateTime lastUpdated;
+
+    @CreationTimestamp
+    private LocalDateTime createdDate;
 
     public Course() {
     }
