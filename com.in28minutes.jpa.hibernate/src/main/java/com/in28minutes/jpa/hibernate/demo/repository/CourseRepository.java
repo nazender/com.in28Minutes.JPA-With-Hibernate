@@ -41,6 +41,11 @@ public class CourseRepository {
         return query.getResultList();
     }
 
+    public List<Course> getByNameLike(String likeName) {
+        TypedQuery<Course> query = entityManager.createQuery("Select c From Course c where name like :name", Course.class).setParameter("name", likeName);
+        return query.getResultList();
+    }
+
 
     public void playWithEntityManager() {
         Course course1 = new Course("Web Services in 100 Steps");

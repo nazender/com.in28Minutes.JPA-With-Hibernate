@@ -19,6 +19,7 @@ public class DemoJpaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 		logger.info("Find all -> {}", repository.findAll());
+		logger.info("Find by name like Spring -> {}", repository.getByNameLike("%Spring%"));
 	}
 
 }
