@@ -39,16 +39,21 @@ public class CourseRepository {
 
     public List<Course> findAll() {
         //TypedQuery<Course> query = entityManager.createQuery("Select c From Course c", Course.class);
-        Query query = entityManager.createNamedQuery("query_get_all_cources");
+        TypedQuery<Course> query = entityManager.createNamedQuery("query_get_all_cources", Course.class);
         return query.getResultList();
     }
 
     public List<Course> getByNameLike(String likeName) {
 //        TypedQuery<Course> query = entityManager.createQuery("Select c From Course c where name like :name", Course.class).setParameter("name", likeName);
-        Query query = entityManager.createNamedQuery("query_get_like_cources").setParameter("name", likeName);
+        TypedQuery<Course> query = entityManager.createNamedQuery("query_get_like_cources", Course.class).setParameter("name", likeName);
         return query.getResultList();
     }
 
+    public List<Course> getByNameLikeNative(String likeName) {
+//        TypedQuery<Course> query = entityManager.createQuery("Select c From Course c where name like :name", Course.class).setParameter("name", likeName);
+        Query query = entityManager.createNativeQuery("SELECT * FROM Course_Details WHERE fullname like :name", Course.class).setParameter("name", likeName);
+        return query.getResultList();
+    }
 
     public void playWithEntityManager() {
         Course course1 = new Course("Web Services in 100 Steps");

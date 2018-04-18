@@ -21,6 +21,7 @@ public class DemoJpaApplication implements CommandLineRunner {
 //		repository.playWithEntityManager();
 		logger.info("Find all -> {}", repository.findAll());
 		logger.info("Find by name like Spring -> {}", repository.getByNameLike("%Spring%"));
+		logger.info("Find by name like Spring -> {}", repository.getByNameLikeNative("%Spring%"));
 	}
 
 }
