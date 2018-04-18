@@ -22,6 +22,16 @@ public class DemoJpaApplication implements CommandLineRunner {
 		logger.info("Find all -> {}", repository.findAll());
 		logger.info("Find by name like Spring -> {}", repository.getByNameLike("%Spring%"));
 		logger.info("Find by name like Spring -> {}", repository.getByNameLikeNative("%Spring%"));
+
+		Course course = repository.findById(10001L);
+		if (course != null) {
+			course.setName("Hello");
+			repository.save(course);
+		}
+
+		Course course1 = new Course("Heelo1");
+		repository.save(course1);
+
 	}
 
 }
