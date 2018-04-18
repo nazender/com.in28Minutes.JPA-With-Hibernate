@@ -9,6 +9,13 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "CourseDetails")
+
+@NamedQueries(
+        value = {
+                @NamedQuery(name = "query_get_all_cources", query = "select c from Course c"),
+                @NamedQuery(name = "query_get_like_cources", query = "Select c From Course c where name like :name")
+        }
+)
 public class Course {
 
     @Id

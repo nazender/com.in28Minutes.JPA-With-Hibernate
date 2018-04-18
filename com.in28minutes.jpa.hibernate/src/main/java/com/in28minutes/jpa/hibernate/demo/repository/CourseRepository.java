@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -37,12 +38,14 @@ public class CourseRepository {
     }
 
     public List<Course> findAll() {
-        TypedQuery<Course> query = entityManager.createQuery("Select c From Course c", Course.class);
+        //TypedQuery<Course> query = entityManager.createQuery("Select c From Course c", Course.class);
+        Query query = entityManager.createNamedQuery("query_get_all_cources");
         return query.getResultList();
     }
 
     public List<Course> getByNameLike(String likeName) {
-        TypedQuery<Course> query = entityManager.createQuery("Select c From Course c where name like :name", Course.class).setParameter("name", likeName);
+//        TypedQuery<Course> query = entityManager.createQuery("Select c From Course c where name like :name", Course.class).setParameter("name", likeName);
+        Query query = entityManager.createNamedQuery("query_get_like_cources").setParameter("name", likeName);
         return query.getResultList();
     }
 
