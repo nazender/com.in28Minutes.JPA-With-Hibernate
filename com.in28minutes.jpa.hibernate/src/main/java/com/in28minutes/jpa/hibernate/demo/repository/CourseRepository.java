@@ -14,8 +14,12 @@ import java.util.List;
 @Transactional
 public class CourseRepository {
 
+    private final EntityManager entityManager;
+
     @Autowired
-    EntityManager entityManager;
+    public CourseRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     public Course findById(Long id) {
         return entityManager.find(Course.class, id);
@@ -49,7 +53,7 @@ public class CourseRepository {
         return query.getResultList();
     }
 
-    public List<Course> getByNameLikeNative(String likeName) {
+    public List getByNameLikeNative(String likeName) {
 //        TypedQuery<Course> query = entityManager.createQuery("Select c From Course c where name like :name", Course.class).setParameter("name", likeName);
         Query query = entityManager.createNativeQuery("SELECT * FROM Course_Details WHERE fullname like :name", Course.class).setParameter("name", likeName);
         return query.getResultList();

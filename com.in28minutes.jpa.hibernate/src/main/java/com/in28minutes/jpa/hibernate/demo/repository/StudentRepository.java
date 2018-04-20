@@ -17,8 +17,12 @@ public class StudentRepository {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private final EntityManager entityManager;
+
     @Autowired
-    EntityManager entityManager;
+    public StudentRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     public Student findById(Long id) {
         return entityManager.find(Student.class, id);
@@ -49,6 +53,14 @@ public class StudentRepository {
         student.setPassport(passport);
         entityManager.persist(student);
     }
+
+    public void changeStudent(Long id) {
+        Student student = entityManager.find(Student.class, id);
+        Passport passport = student.getPassport();
+        passport.setNumber("EHello");
+        student.setName("Anton");
+    }
+
 
     public void someOperationToUnderstandPersistenceContext() {
         //Database Operation 1 - Retrieve student

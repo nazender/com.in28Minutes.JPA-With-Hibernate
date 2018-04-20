@@ -2,6 +2,7 @@ package com.in28minutes.jpa.hibernate.demo.repository;
 
 import javax.persistence.EntityManager;
 
+import com.in28minutes.jpa.hibernate.demo.entity.Passport;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ public class StudentRepositoryTest {
     StudentRepository repository;
 
     @Autowired
-    EntityManager em;
+    EntityManager entityManager;
 
     //Session & Session Factory
 
@@ -33,15 +34,19 @@ public class StudentRepositoryTest {
     //Transaction
 
     @Test
+    @Transactional
     public void someTest() {
-        repository.someOperationToUnderstandPersistenceContext();
+        Student student = entityManager.find(Student.class, 20001L);
+        Passport passport = student.getPassport();
+        passport.setNumber("EHello");
+        student.setName("Anton");
     }
 
 
     @Test
     @Transactional
     public void retrieveStudentAndPassportDetails() {
-        Student student = em.find(Student.class, 20001L);
+        Student student = entityManager.find(Student.class, 20001L);
         logger.info("student -> {}", student);
         logger.info("passport -> {}",student.getPassport());
     }

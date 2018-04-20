@@ -14,11 +14,15 @@ public class DemoJpaApplication implements CommandLineRunner {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private CourseRepository repository;
+	private final CourseRepository repository;
+
+	private final StudentRepository studentRepository;
 
 	@Autowired
-	private StudentRepository studentRepository;
+	public DemoJpaApplication(CourseRepository repository, StudentRepository studentRepository) {
+		this.repository = repository;
+		this.studentRepository = studentRepository;
+	}
 
 	@Override
 	public void run(String... arg0) throws Exception {
@@ -36,9 +40,10 @@ public class DemoJpaApplication implements CommandLineRunner {
 //		Course course1 = new Course("Heelo1");
 //		repository.save(course1);
 
-		studentRepository.saveStudentWithPassport();
+		//studentRepository.saveStudentWithPassport();
+		studentRepository.changeStudent(20001L);
 		logger.info("Student by id {}", studentRepository.findById(20001L));
-		studentRepository.retriveStudentAndPassportDetails();
+		//studentRepository.retriveStudentAndPassportDetails();
 	}
 
 }

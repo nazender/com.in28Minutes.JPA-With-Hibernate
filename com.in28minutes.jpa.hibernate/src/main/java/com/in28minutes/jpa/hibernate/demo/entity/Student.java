@@ -18,7 +18,6 @@ public class Student {
     private String name;
 
     @OneToOne(fetch=FetchType.LAZY)
-    //@OneToOne
     private Passport passport;
 
     protected Student() {
@@ -52,4 +51,6 @@ public class Student {
     public String toString() {
         return String.format("Student[%s]", name);
     }
+
+
 }
