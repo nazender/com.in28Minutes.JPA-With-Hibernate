@@ -38,7 +38,7 @@ public class DemoJpaApplication implements CommandLineRunner {
 
 		studentRepository.saveStudentWithPassport();
 		logger.info("Student by id {}", studentRepository.findById(20001L));
-
+		studentRepository.retriveStudentAndPassportDetails();
 	}
 
 }

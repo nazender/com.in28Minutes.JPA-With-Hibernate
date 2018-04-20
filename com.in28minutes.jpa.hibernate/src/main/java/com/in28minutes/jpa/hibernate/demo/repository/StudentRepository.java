@@ -69,4 +69,10 @@ public class StudentRepository {
         //Persistence Context (student++ , passport++)
     }
 
+    public void retriveStudentAndPassportDetails() {
+        Student student = entityManager.find(Student.class, 20001L);
+        logger.info("student -> {}", student);
+        logger.info("passport -> {}", student.getPassport());
+    }
+
 }
