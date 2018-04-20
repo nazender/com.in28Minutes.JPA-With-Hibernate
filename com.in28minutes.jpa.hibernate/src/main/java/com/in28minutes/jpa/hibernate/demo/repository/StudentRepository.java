@@ -18,18 +18,18 @@ public class StudentRepository {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    EntityManager em;
+    EntityManager entityManager;
 
     public Student findById(Long id) {
-        return em.find(Student.class, id);
+        return entityManager.find(Student.class, id);
     }
 
     public Student save(Student student) {
 
         if (student.getId() == null) {
-            em.persist(student);
+            entityManager.persist(student);
         } else {
-            em.merge(student);
+            entityManager.merge(student);
         }
 
         return student;
@@ -37,22 +37,22 @@ public class StudentRepository {
 
     public void deleteById(Long id) {
         Student student = findById(id);
-        em.remove(student);
+        entityManager.remove(student);
     }
 
     public void saveStudentWithPassport() {
         Passport passport = new Passport("Z123456");
-        em.persist(passport);
+        entityManager.persist(passport);
 
         Student student = new Student("Mike");
 
         student.setPassport(passport);
-        em.persist(student);
+        entityManager.persist(student);
     }
 
     public void someOperationToUnderstandPersistenceContext() {
         //Database Operation 1 - Retrieve student
-        Student student = em.find(Student.class, 20001L);
+        Student student = entityManager.find(Student.class, 20001L);
         //Persistence Context (student)
 
 
