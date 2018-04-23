@@ -1,45 +1,45 @@
 package com.in28minutes.jpa.hibernate.demo.entity;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
+import javax.transaction.Transactional;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.Objects;
-
 @Entity
-@Table(name = "CourseDetails")
-
-@NamedQueries(
-        value = {
-                @NamedQuery(name = "query_get_all_cources", query = "select c from Course c"),
-                @NamedQuery(name = "query_get_like_cources", query = "Select c From Course c where name like :name")
-        }
-)
+@NamedQueries(value = {
+        @NamedQuery(name = "query_get_all_courses",
+                query = "Select  c  From Course c"),
+        @NamedQuery(name = "query_get_100_Step_courses",
+                query = "Select  c  From Course c where name like '%100 Steps'") })
+@Table(name = "Course_Details")
 public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
-    @Column(name = "fullname", nullable = false, length = 100)
+    @Column(name = "fullname", nullable = false)
     private String name;
 
+    @OneToMany(mappedBy="course")
+    private List<Review> reviews = new ArrayList<>();
+
     @UpdateTimestamp
-    private LocalDateTime lastUpdated;
+    private LocalDateTime lastUpdatedDate;
 
     @CreationTimestamp
     private LocalDateTime createdDate;
 
-    public Course() {
+    protected Course() {
     }
 
     public Course(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getName() {
@@ -50,26 +50,27 @@ public class Course {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Course)) return false;
-        Course course = (Course) o;
-        return Objects.equals(getId(), course.getId()) &&
-                Objects.equals(getName(), course.getName());
+
+    public List<Review> getReviews() {
+        return reviews;
     }
 
-    @Override
-    public int hashCode() {
+    public void addReview(Review review) {
+        this.reviews.add(review);
+    }
 
-        return Objects.hash(getId(), getName());
+    public void removeReview(Review review) {
+        this.reviews.remove(review);
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override
     public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return String.format("Course[%s]", name);
     }
+
+
 }
