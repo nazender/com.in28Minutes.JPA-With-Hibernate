@@ -81,7 +81,7 @@ public class CourseRepository {
 
     }
 
-    public void addReviewsForCourse() {
+    public void addHardcodedReviewsForCourse() {
         //get the course 10003
         Course course = findById(10003L);
         logger.info("course.getReviews() -> {}", course.getReviews());
@@ -100,6 +100,22 @@ public class CourseRepository {
         //save it to the database
         entityManager.persist(review1);
         entityManager.persist(review2);
+    }
+
+    public void addReviewsForCourse(Long courseId, List<Review> reviews) {
+        Course course = findById(courseId);
+
+        if (course != null) {
+            logger.info("course.getReviews() -> {}", course.getReviews());
+            for (Review review : reviews) {
+                //setting the relationship
+                course.addReview(review);
+                review.setCourse(course);
+                entityManager.persist(review);
+            }
+        } else {
+            logger.info("course {} not exista", courseId);
+        }
     }
 
 }

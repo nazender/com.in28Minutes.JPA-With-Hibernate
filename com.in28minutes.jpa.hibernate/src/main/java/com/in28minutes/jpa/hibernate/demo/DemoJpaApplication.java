@@ -2,6 +2,7 @@ package com.in28minutes.jpa.hibernate.demo;
 
 import com.in28minutes.jpa.hibernate.demo.entity.Course;
 import com.in28minutes.jpa.hibernate.demo.entity.Passport;
+import com.in28minutes.jpa.hibernate.demo.entity.Review;
 import com.in28minutes.jpa.hibernate.demo.entity.Student;
 import com.in28minutes.jpa.hibernate.demo.repository.CourseRepository;
 import com.in28minutes.jpa.hibernate.demo.repository.StudentRepository;
@@ -11,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class DemoJpaApplication implements CommandLineRunner {
@@ -29,33 +33,12 @@ public class DemoJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg0) throws Exception {
-//		repository.playWithEntityManager();
-//		logger.info("Find all -> {}", repository.findAll());
-//		logger.info("Find by name like Spring -> {}", repository.getByNameLike("%Spring%"));
-//		logger.info("Find by name like Spring -> {}", repository.getByNameLikeNative("%Spring%"));
+		List<Review> reviews = new ArrayList<>();
 
-//		Course course = repository.findById(10001L);
-//		if (course != null) {
-//			course.setName("Hello");
-//			repository.save(course);
-//		}
+		reviews.add(new Review("5", "Great Hands-on Stuff."));
+		reviews.add(new Review("5", "Hatsoff."));
 
-		courseRepository.addReviewsForCourse();
-		Course course = courseRepository.findById(10003L);
-		logger.info("Course 10003 {}", course);
-		logger.info("Reviews 10003 {}", course.getReviews());
-
-//		repository.save(course1);
-
-		//studentRepository.saveStudentWithPassport();
-//		studentRepository.changeStudent(20001L);
-		//logger.info("Student by id {}", studentRepository.findById(20001L));
-		//studentRepository.retriveStudentAndPassportDetails();
-
-//		Student student = studentRepository.findById(20001L);
-		//logger.info("Student -> {}", student);
-//		Passport passport = student.getPassport();
-		//logger.info("Passport -> {}", passport);
+		courseRepository.addReviewsForCourse(10003L, reviews );
 	}
 
 }
