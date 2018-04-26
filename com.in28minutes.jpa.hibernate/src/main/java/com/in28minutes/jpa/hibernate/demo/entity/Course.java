@@ -16,18 +16,21 @@ import org.hibernate.annotations.UpdateTimestamp;
                 query = "Select  c  From Course c"),
         @NamedQuery(name = "query_get_100_Step_courses",
                 query = "Select  c  From Course c where name like '%100 Steps'") })
-@Table(name = "Course_Details")
+
 public class Course {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(name = "fullname", nullable = false)
+    @Column(nullable = false)
     private String name;
 
     @OneToMany(mappedBy="course")
     private List<Review> reviews = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students = new ArrayList<>();
 
     @UpdateTimestamp
     private LocalDateTime lastUpdatedDate;
@@ -63,6 +66,14 @@ public class Course {
         this.reviews.remove(review);
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void addStudent(Student student) {
+        this.students.add(student);
+    }
+
     public Long getId() {
         return id;
     }
@@ -71,6 +82,4 @@ public class Course {
     public String toString() {
         return String.format("Course[%s]", name);
     }
-
-
 }

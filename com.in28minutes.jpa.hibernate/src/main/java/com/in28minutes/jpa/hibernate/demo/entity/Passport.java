@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+
 @Entity
 public class Passport {
 
@@ -18,7 +19,6 @@ public class Passport {
     private String number;
 
     @OneToOne(fetch=FetchType.LAZY, mappedBy="passport")
-    //@OneToOne(fetch=FetchType.LAZY)
     private Student student;
 
     protected Passport() {

@@ -13,10 +13,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+//@Component
 public class DemoJpaApplication implements CommandLineRunner {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -26,8 +27,11 @@ public class DemoJpaApplication implements CommandLineRunner {
 	private final StudentRepository studentRepository;
 
 	@Autowired
-	public DemoJpaApplication(CourseRepository repository, StudentRepository studentRepository) {
-		this.courseRepository = repository;
+	EntityManager em;
+
+	@Autowired
+	public DemoJpaApplication(CourseRepository courseRepository, StudentRepository studentRepository) {
+		this.courseRepository = courseRepository;
 		this.studentRepository = studentRepository;
 	}
 
@@ -39,6 +43,13 @@ public class DemoJpaApplication implements CommandLineRunner {
 		reviews.add(new Review("5", "Hatsoff."));
 
 		courseRepository.addReviewsForCourse(10003L, reviews );
+
+		Course course = courseRepository.findById(10003L);
+		logger.info("Course {}", course.getReviews());
+
+//		Review review = em.find(Review.class, 1);
+// 		logger.info("{}", review.getCourse());
+
 	}
 
 }

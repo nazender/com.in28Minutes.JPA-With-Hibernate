@@ -17,23 +17,19 @@ public class StudentRepository {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final EntityManager entityManager;
-
     @Autowired
-    public StudentRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+    EntityManager em;
 
     public Student findById(Long id) {
-        return entityManager.find(Student.class, id);
+        return em.find(Student.class, id);
     }
 
     public Student save(Student student) {
 
         if (student.getId() == null) {
-            entityManager.persist(student);
+            em.persist(student);
         } else {
-            entityManager.merge(student);
+            em.merge(student);
         }
 
         return student;
@@ -41,30 +37,22 @@ public class StudentRepository {
 
     public void deleteById(Long id) {
         Student student = findById(id);
-        entityManager.remove(student);
+        em.remove(student);
     }
 
     public void saveStudentWithPassport() {
         Passport passport = new Passport("Z123456");
-        entityManager.persist(passport);
+        em.persist(passport);
 
         Student student = new Student("Mike");
 
         student.setPassport(passport);
-        entityManager.persist(student);
+        em.persist(student);
     }
-
-    public void changeStudent(Long id) {
-        Student student = entityManager.find(Student.class, id);
-        Passport passport = student.getPassport();
-        passport.setNumber("EHello");
-        student.setName("Anton");
-    }
-
 
     public void someOperationToUnderstandPersistenceContext() {
         //Database Operation 1 - Retrieve student
-        Student student = entityManager.find(Student.class, 20001L);
+        Student student = em.find(Student.class, 20001L);
         //Persistence Context (student)
 
 
@@ -79,12 +67,6 @@ public class StudentRepository {
         //Database Operation 4 - update student
         student.setName("Ranga - updated");
         //Persistence Context (student++ , passport++)
-    }
-
-    public void retriveStudentAndPassportDetails() {
-        Student student = entityManager.find(Student.class, 20001L);
-        logger.info("student -> {}", student);
-        logger.info("passport -> {}", student.getPassport());
     }
 
 }

@@ -1,11 +1,8 @@
 package com.in28minutes.jpa.hibernate.demo.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -19,6 +16,9 @@ public class Student {
 
     @OneToOne(fetch=FetchType.LAZY)
     private Passport passport;
+
+    @ManyToMany
+    private List<Course> courses = new ArrayList<>();
 
     protected Student() {
     }
@@ -43,6 +43,14 @@ public class Student {
         this.passport = passport;
     }
 
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void addCourse(Course course) {
+        this.courses.add(course);
+    }
+
     public Long getId() {
         return id;
     }
@@ -51,6 +59,4 @@ public class Student {
     public String toString() {
         return String.format("Student[%s]", name);
     }
-
-
 }

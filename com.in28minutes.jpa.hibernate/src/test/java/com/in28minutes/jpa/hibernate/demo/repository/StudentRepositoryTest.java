@@ -25,38 +25,31 @@ public class StudentRepositoryTest {
     StudentRepository repository;
 
     @Autowired
-    EntityManager entityManager;
+    EntityManager em;
 
-    //Session & Session Factory
+    // Session & Session Factory
 
-
-    //EntityManager & Persistence Context
-    //Transaction
+    // EntityManager & Persistence Context
+    // Transaction
 
     @Test
-    @Transactional
     public void someTest() {
-        Student student = entityManager.find(Student.class, 20001L);
-        Passport passport = student.getPassport();
-        passport.setNumber("EHello");
-        student.setName("Anton");
+        repository.someOperationToUnderstandPersistenceContext();
     }
-
 
     @Test
     @Transactional
     public void retrieveStudentAndPassportDetails() {
-        Student student = entityManager.find(Student.class, 20001L);
+        Student student = em.find(Student.class, 20001L);
         logger.info("student -> {}", student);
-        logger.info("passport -> {}",student.getPassport());
+        logger.info("passport -> {}", student.getPassport());
     }
 
     @Test
     @Transactional
-    public void retrievePassportAndAssociatedStudents() {
-        Passport passport = entityManager.find(Passport.class, 40001L);
-        logger.info("student -> {}", passport);
-        logger.info("passport -> {}",passport.getStudent());
+    public void retrievePassportAndAssociatedStudent() {
+        Passport passport = em.find(Passport.class, 40001L);
+        logger.info("passport -> {}", passport);
+        logger.info("student -> {}", passport.getStudent());
     }
-
 }
