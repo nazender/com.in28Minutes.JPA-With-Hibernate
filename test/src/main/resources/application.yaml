@@ -1,0 +1,9 @@
+logging:
+ level:
+   org.springframework: info
+   org.springframework.web.servlet: debug
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
