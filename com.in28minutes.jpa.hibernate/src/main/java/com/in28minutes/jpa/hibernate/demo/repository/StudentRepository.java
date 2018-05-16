@@ -2,6 +2,7 @@ package com.in28minutes.jpa.hibernate.demo.repository;
 
 import javax.persistence.EntityManager;
 
+import com.in28minutes.jpa.hibernate.demo.entity.Course;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,16 @@ public class StudentRepository {
         //Database Operation 4 - update student
         student.setName("Ranga - updated");
         //Persistence Context (student++ , passport++)
+    }
+
+    public void insertStudentAndCourse(Student student, Course course){
+        //Student student = new Student("Jack");
+        //Course course = new Course("Microservices in 100 Steps");
+        student.addCourse(course);
+        course.addStudent(student);
+
+        em.persist(student);
+        em.persist(course);
     }
 
 }
