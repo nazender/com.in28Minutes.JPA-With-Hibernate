@@ -1,11 +1,10 @@
 package com.in28minutes.jpa.hibernate.demo.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "EmployeeType")
 public abstract class Employee {
 
     @Id
@@ -13,7 +12,7 @@ public abstract class Employee {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    protected String name;
 
     protected Employee() {
     }

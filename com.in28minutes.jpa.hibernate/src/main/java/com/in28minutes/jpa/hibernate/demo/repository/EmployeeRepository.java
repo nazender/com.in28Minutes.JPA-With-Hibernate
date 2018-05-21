@@ -17,14 +17,19 @@ public class EmployeeRepository {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private final EntityManager entityManager;
+
     @Autowired
-    EntityManager em;
+    public EmployeeRepository(EntityManager em) {
+        this.entityManager = em;
+    }
 
     public void insert(Employee employee) {
-        em.persist(employee);
+        entityManager.persist(employee);
     }
 
     public List<Employee> retrieveAllEmployees() {
-        return em.createQuery("select e from Employee e", Employee.class).getResultList();
+        return entityManager.createQuery("select e from Employee e", Employee.class).getResultList();
     }
+
 }

@@ -16,4 +16,6 @@ public class PartTimeEmployee extends Employee {
         super(name);
         this.hourlyWage = hourlyWage;
     }
+
+
 }

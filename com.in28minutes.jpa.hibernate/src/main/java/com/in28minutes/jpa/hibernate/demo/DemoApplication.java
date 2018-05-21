@@ -49,7 +49,9 @@ public class DemoApplication implements CommandLineRunner{
 		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
 		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
 
-		logger.info("All Employees -> {}", employeeRepository.retrieveAllEmployees());
+		List<Employee> employees = employeeRepository.retrieveAllEmployees();
+
+		logger.info("All Employees -> {}", employees);
 
 	}
 }
