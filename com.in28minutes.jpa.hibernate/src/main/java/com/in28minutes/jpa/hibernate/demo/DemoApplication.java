@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner{
@@ -35,6 +36,10 @@ public class DemoApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... arg0) throws Exception {
+
+		long st, en;
+		double el;
+
 		//studentRepository.saveStudentWithPassport();
 		//repository.playWithEntityManager();
 		//courseRepository.addHardcodedReviewsForCourse();
@@ -45,23 +50,34 @@ public class DemoApplication implements CommandLineRunner{
 
 		//courseRepository.addReviewsForCourse(10003L, reviews );
 
-
 		/**
-		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
-		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
+		st = System.nanoTime();
+		for (int i = 0; i < 100; i++) {
+			employeeRepository.insert(new PartTimeEmployee("Jill" + i, new BigDecimal("50")));
+			employeeRepository.insert(new FullTimeEmployee("Jack" + i, new BigDecimal("10000")));
+			employeeRepository.insert(new AEmployee("Poll" + i, "TestValue"));
+		}
+		en = System.nanoTime();
+		el = (en - st)  / 1000000000.0;
+		System.out.println("Insert execute time " + el + " sec");
 
+		st = System.nanoTime();
 		List<Employee> employees = employeeRepository.retrieveAllEmployees();
-
-		logger.info("All Employees -> {}", employees);
+		en = System.nanoTime();
+		el = (en - st)  / 1000000000.0;
+		System.out.println("Select execute time " + el + " sec");
 */
-		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
-		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
 
-		logger.info("Full Time Employees -> {}",
-				employeeRepository.retrieveAllFullTimeEmployees());
 
-		logger.info("Part Time Employees -> {}",
-				employeeRepository.retrieveAllPartTimeEmployees());
+		//logger.info("All Employees -> {}", employees);
 
+//		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
+//		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
+
+//		logger.info("Full Time Employees -> {}",
+//				employeeRepository.retrieveAllFullTimeEmployees());
+
+//		logger.info("Part Time Employees -> {}",
+//				employeeRepository.retrieveAllPartTimeEmployees());
 	}
 }
