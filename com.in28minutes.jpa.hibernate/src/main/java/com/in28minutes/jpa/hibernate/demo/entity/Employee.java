@@ -2,9 +2,10 @@ package com.in28minutes.jpa.hibernate.demo.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "EmployeeType")
+@MappedSuperclass
+//@Entity
+//@Inheritance(strategy = InheritanceType.JOINED)
+//@DiscriminatorColumn(name = "EmployeeType")
 public abstract class Employee {
 
     @Id

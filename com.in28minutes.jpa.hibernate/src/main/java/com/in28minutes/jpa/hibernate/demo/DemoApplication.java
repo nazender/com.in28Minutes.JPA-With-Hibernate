@@ -46,12 +46,22 @@ public class DemoApplication implements CommandLineRunner{
 		//courseRepository.addReviewsForCourse(10003L, reviews );
 
 
+		/**
 		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
 		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
 
 		List<Employee> employees = employeeRepository.retrieveAllEmployees();
 
 		logger.info("All Employees -> {}", employees);
+*/
+		employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
+		employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
+
+		logger.info("Full Time Employees -> {}",
+				employeeRepository.retrieveAllFullTimeEmployees());
+
+		logger.info("Part Time Employees -> {}",
+				employeeRepository.retrieveAllPartTimeEmployees());
 
 	}
 }
