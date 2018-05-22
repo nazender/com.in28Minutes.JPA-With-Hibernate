@@ -158,7 +158,6 @@ public class CriteriaQueryTest {
         TypedQuery<Course> query = em.createQuery(cq.select(courseRoot));
 
         List<Course> resultList = query.getResultList();
-
         logger.info("Typed Query -> {}", resultList);
         // [Course[JPA in 50 Steps], Course[JPA in 50 Steps], Course[JPA in 50
         // Steps], Course[Spring in 50 Steps], Course[Spring Boot in 100 Steps]]

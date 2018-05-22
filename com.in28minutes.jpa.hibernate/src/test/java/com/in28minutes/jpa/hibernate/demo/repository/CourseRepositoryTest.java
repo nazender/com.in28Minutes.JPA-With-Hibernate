@@ -1,7 +1,6 @@
 package com.in28minutes.jpa.hibernate.demo.repository;
 
 import com.in28minutes.jpa.hibernate.demo.DemoApplication;
-import com.in28minutes.jpa.hibernate.demo.DemoJpaApplication;
 import com.in28minutes.jpa.hibernate.demo.entity.Course;
 import com.in28minutes.jpa.hibernate.demo.entity.Review;
 import org.junit.Test;
@@ -12,9 +11,11 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
+
 
 import static org.junit.Assert.*;
 
@@ -74,7 +75,7 @@ public class CourseRepositoryTest {
     }
 
     @Test
-    @Transactional
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void retrieveCourseForReview() {
         Review review = em.find(Review.class, 50001L);
         logger.info("{}",review.getCourse());
